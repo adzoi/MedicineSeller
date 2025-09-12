@@ -1,0 +1,25 @@
+This directory contains product images for MedicineSeller.
+
+For production use, replace the placeholder images with actual product photos.
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 300x300 pixels minimum
+- Background: Clean, professional
+- Style: Consistent across all products
+
+Current placeholder images referenced in products.json:
+- aspirin-plus.jpg
+- vitamin-d3.jpg
+- omega-3.jpg
+- probiotic.jpg
+- melatonin.jpg
+- collagen.jpg
+- magnesium.jpg
+- b-complex.jpg
+- turmeric.jpg
+- zinc.jpg
+- coq10.jpg
+- glucosamine.jpg
+
+You can use stock photos, product images from suppliers, or create custom photography.
+Ensure all images are properly licensed for commercial use.

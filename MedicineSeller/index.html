@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedicineSeller - Premium Online Pharmacy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Dev Note: Run via local server: `npx serve` or `python -m http.server 8000` — fetch from filesystem may fail. -->
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L13.09 8.26L19 7L14.74 12L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12L5 7L10.91 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <h1 class="site-title">MedicineSeller</h1>
+      </div>
+      
+      <div class="theme-toggle">
+        <button class="theme-switch" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-icon sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.76 4.84 5.34 3.42 3.93 4.84 5.34 6.26 6.76 4.84zm10.48 0 1.42-1.42 1.41 1.42-1.41 1.42-1.42-1.42zM12 2h0v2h0V2zm0 18h0v2h0v-2zM2 12h2v0H2zm18 0h2v0h-2zM6.76 19.16l-1.42 1.42-1.41-1.42 1.41-1.42 1.42 1.42zm10.48 0 1.42 1.42 1.41-1.42-1.41-1.42-1.42 1.42z"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+          </span>
+          <span class="switch-icon moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+            </svg>
+          </span>
+          <span class="switch-thumb" aria-hidden="true"></span>
+        </button>
+        <button id="lang-flag" class="theme-switch lang-flag" aria-label="Toggle language" title="Language">
+          🇷🇺
+        </button>
+      </div>
+
+      
+    </div>
+  </header>
+
+  <!-- Sorting Controls -->
+  <section class="sorting-controls">
+    <div class="controls-container">
+      <div class="search-section">
+        <input type="text" id="search-input" class="search-input" placeholder="Search products..." aria-label="Search products">
+      </div>
+      
+      <div class="filter-section">
+        <select id="category-select" class="category-select" aria-label="Filter by category">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+      
+      <div class="sort-dropdown">
+        <button class="dropdown-toggle" id="sort-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="sort-menu">
+          <svg class="sort-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 10l5 5 5-5H7z"/>
+          </svg>
+          Sort
+        </button>
+        <ul class="dropdown-menu" id="sort-menu" role="menu" aria-labelledby="sort-toggle">
+          <li role="menuitem"><button class="dropdown-item" data-sort="name" data-order="asc">Sort by Name (Ascending)</button></li>
+          <li role="menuitem"><button class="dropdown-item" data-sort="name" data-order="desc">Sort by Name (Descending)</button></li>
+          <li role="menuitem"><button class="dropdown-item" data-sort="price" data-order="asc">Sort by Price (Low → High)</button></li>
+          <li role="menuitem"><button class="dropdown-item" data-sort="price" data-order="desc">Sort by Price (High → Low)</button></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-list" role="grid" aria-label="Product grid">
+      <!-- Products will be dynamically loaded here -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-section">
+      <div class="pagination-info">
+        <span class="page-info"><span id="showing-page-text">Showing page</span> <span id="current-page">1</span> <span id="of-text">of</span> <span id="total-pages">1</span></span>
+      </div>
+      <div class="pagination-controls" id="pagination" role="navigation" aria-label="Pagination">
+        <!-- Pagination buttons will be dynamically loaded here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-links">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/anzor_tsis/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm4.25 3.25a5.25 5.25 0 1 1 0 10.5a5.25 5.25 0 0 1 0-10.5Zm0 1.5a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5Zm5-1.25a.75.75 0 1 1 0 1.5a.75.75 0 0 1 0-1.5Z"/>
+          </svg>
+        </a>
+
+        <!-- WhatsApp (replace the phone number later) -->
+        <a href="https://wa.me/+995597006664" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.15-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.205-.242-.58-.487-.501-.67-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.007-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347ZM12 21.5c-1.944 0-3.841-.52-5.487-1.509l-3.84 1.01 1.026-3.74A9.86 9.86 0 0 1 2 11.867C2 6.421 6.477 2 12 2c2.652 0 5.146 1.037 7.029 2.921A9.86 9.86 0 0 1 22 11.867c0 5.446-4.477 9.867-10 9.867Z"/>
+          </svg>
+        </a>
+        <!-- Twitter -->
+        <a href="https://x.com/Mlkk49910935" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22.46 6c-.77.35-1.6.58-2.46.69c.89-.53 1.57-1.37 1.89-2.37c-.83.49-1.75.84-2.72 1.03A4.18 4.18 0 0 0 16.11 4c-2.32 0-4.2 1.92-4.2 4.29c0 .34.04.67.11.99C8.01 9.11 5.13 7.59 3.15 5.23c-.37.67-.58 1.45-.58 2.28c0 1.48.72 2.78 1.81 3.54c-.67-.02-1.3-.21-1.85-.52v.05c0 2.07 1.43 3.79 3.32 4.18c-.35.1-.72.15-1.1.15c-.27 0-.53-.03-.78-.08c.53 1.72 2.08 2.98 3.91 3.01A8.38 8.38 0 0 1 2 19.54A11.8 11.8 0 0 0 8.29 21c7.55 0 11.68-6.47 11.68-12.08c0-.18 0-.36-.01-.53C21.2 7.64 21.9 6.87 22.46 6Z"/>
+          </svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/mel.khi.92" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89c1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/>
+          </svg>
+        </a>
+      </div>
+      <div class="footer-info">
+        <p>&copy; 2025 MedicineSeller. Premium Healthcare Solutions.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Modal -->
+  <div class="modal hidden" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true" tabindex="-1">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close modal">&times;</button>
+      <div class="modal-body">
+        <!-- Modal content will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Chat Widget -->
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-toggle" id="chat-toggle" aria-label="Open AI chat assistant">
+      <svg class="chat-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/>
+      </svg>
+    </div>
+    <div class="chat-container" id="chat-container" aria-hidden="true">
+      <div class="chat-header">
+        <h3>AI Stock Assistant</h3>
+        <button class="chat-close" id="chat-close" aria-label="Close chat">&times;</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-message bot-message">
+          <div class="message-content">
+            Hello! I'm your AI medicine assistant. I can help you find information about our products or answer general health questions. How can I assist you today?
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" id="chat-input" class="chat-input" placeholder="Ask about medicines..." aria-label="Type your message">
+        <button class="chat-send" id="chat-send" aria-label="Send message">
+          <svg class="send-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <aside class="cart-sidebar" id="cart-sidebar" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-header">
+      <h3 id="cart-title">Your Cart</h3>
+      <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-body" id="cart-items" role="list"></div>
+    <div class="cart-footer">
+      <button class="buy-button" id="cart-buy-selected">Buy Selected</button>
+      <button class="add-to-cart-button" id="cart-clear">Clear Cart</button>
+    </div>
+  </aside>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+    <div class="toast-content">
+      <span class="toast-message" id="toast-message"></span>
+      <button class="toast-close" id="toast-close" aria-label="Close notification">&times;</button>
+    </div>
+  </div>
+
+  <!-- Floating Cart Button -->
+  <button class="cart-fab" id="cart-fab" aria-label="Open cart" aria-controls="cart-sidebar">
+    <svg class="cart-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.16 14h9.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21.99 5H6.21L5.27 3H2v2h2l3.6 7.59L6.25 15.04C5.77 15.63 6.19 16.5 6.94 16.5H20v-2H7.42l-.26-.5Z"/>
+    </svg>
+    <span class="cart-badge" id="cart-badge">0</span>
+  </button>
+
+  
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
